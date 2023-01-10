@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  db:
+    container_name: coderhouse_db_1
+    restart: always
+    image: bitnami/mongodb:4.2
+    ports:
+      - "27017:27017"
+    networks:
+     - coderhousenet
+    environment:
+      MONGODB_ROOT_PASSWORD: 123456
+      MONGODB_USERNAME: coderhouse
+      MONGODB_PASSWORD: coderhouse
+      MONGODB_DATABASE: coderhouse
+    volumes:
+      - data:/bitnami/mongodb
+
+networks:
+  coderhousenet:
+    driver: "bridge"
+
+volumes:
+  data:
+    driver: "local"
